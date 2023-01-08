@@ -16,6 +16,7 @@ function Hero({pageInfo}: Props) {
     words: [
       "",
       "",
+      "",
       "Hello",
       `My Name is ${pageInfo?.name}`,
       "Welcome to my portfolio"
@@ -45,8 +46,8 @@ function Hero({pageInfo}: Props) {
         initial={{opacity: 0}}
         animate={{opacity: 1}}
         transition={{
-          delay: 2.5,
-          duration: 0.5
+          delay: 3,
+          duration: 1
         }}
         className='space-y-8 mt-10 z-20'>
         <h2 className='text-sm uppercase text-gray-500 pb-2 tracking-[15px] mr-[-15px]' >{pageInfo?.role}</h2>
