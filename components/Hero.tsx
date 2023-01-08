@@ -5,6 +5,7 @@ import { Cursor, useTypewriter } from 'react-simple-typewriter'
 import BackgroundCircles from './BackgroundCircles'
 import { PageInfo } from '../typings'
 import { urlFor } from '../sanity'
+import { motion } from 'framer-motion'
 
 type Props = {
   pageInfo: PageInfo
@@ -13,6 +14,8 @@ type Props = {
 function Hero({pageInfo}: Props) {
   const [text, count] = useTypewriter({
     words: [
+      "",
+      "",
       "Hello",
       `My Name is ${pageInfo?.name}`,
       "Welcome to my portfolio"
@@ -38,8 +41,15 @@ function Hero({pageInfo}: Props) {
       />
       </div>
 
-      <div className='space-y-8 mt-10 z-20'>
-        <h2 className='text-sm uppercase text-gray-500 pb-2 tracking-[15px]' >{pageInfo?.role}</h2>
+      <motion.div 
+        initial={{opacity: 0}}
+        animate={{opacity: 1}}
+        transition={{
+          delay: 2.5,
+          duration: 0.5
+        }}
+        className='space-y-8 mt-10 z-20'>
+        <h2 className='text-sm uppercase text-gray-500 pb-2 tracking-[15px] mr-[-15px]' >{pageInfo?.role}</h2>
         <h1 className='text-xl sm:text-4xl lg:text-5xl font-semibold px-10' >
           <span className='mr-3'>{text}</span>
           <Cursor cursorColor='white' />
@@ -59,7 +69,7 @@ function Hero({pageInfo}: Props) {
           </Link>
 
         </div>
-      </div>
+      </motion.div>
 
     </div>
   )

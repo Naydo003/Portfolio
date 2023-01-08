@@ -25,7 +25,8 @@ function Header({ socials }: Props) {
           scale: 1
         }}
         transition={{
-          duration: 1.5
+          delay: 2,
+          duration: 0.5
         }}
         className="flex flex-row items-center text-grey-300">
         {socials.map(social => (
@@ -51,7 +52,8 @@ function Header({ socials }: Props) {
             scale: 1
           }}
           transition={{
-            duration: 1.5
+            delay: 2,
+            duration: 0.5
           }} 
           className="flex flex-row items-center text-grey-300 cursor-pointer"
         >

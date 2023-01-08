@@ -11,11 +11,14 @@ import ProjectsList from '../components/ProjectsList'
 import Contact from '../components/Contact'
 import { GetStaticProps } from 'next'
 import { Experience, PageInfo, Project, Skill, Social } from '../typings'
-import { fetchPageInfo } from '../utils/fetchPageInfo'
-import { fetchProjects } from '../utils/fetchProjects'
-import { fetchExperiences } from '../utils/fetchExperiences'
-import { fetchSkills } from '../utils/fetchSkills'
-import { fetchSocials } from '../utils/fetchSocials'
+// import { fetchPageInfo } from '../utils/fetchPageInfo'
+// import { fetchProjects } from '../utils/fetchProjects'
+// import { fetchExperiences } from '../utils/fetchExperiences'
+// import { fetchSkills } from '../utils/fetchSkills'
+// import { fetchSocials } from '../utils/fetchSocials'
+
+import { groq } from 'next-sanity'
+import { sanityClient } from '../sanity'
 
 
 
@@ -35,7 +38,7 @@ export default function Home(props: Props) {
   return (
     <div className='bg-[rgb(36,36,36)] text-white h-screen snap-y snap-mandatory overflow-y-scroll overflow-x-hidden z-0 scrollbar-thin scrollbar-track-gray-400/40 scrollbar-thumb-mainColour-100/80'>
       <Head>
-        <title>Nathan&apos;s Portfolio</title>
+        <title>{props.pageInfo.name}&apos;s Portfolio</title>
       </Head>
   
       <Header socials={props.socials} />
@@ -75,11 +78,23 @@ export default function Home(props: Props) {
 export const getStaticProps: GetStaticProps<Props> = async () => {
 
 
-  const pageInfo: PageInfo = await fetchPageInfo()
-  const projects: Project[] = await fetchProjects()
-  const experiences: Experience[] = await fetchExperiences()
-  const skills: Skill[] = await fetchSkills()
-  const socials: Social[] = await fetchSocials()
+  const pageInfo: PageInfo = await sanityClient.fetch(groq`*[_type == "pageInfo"][0]`)
+  const socials: Social[] = await sanityClient.fetch(groq`*[_type == "social"]`)
+  const skills: Skill[] = await sanityClient.fetch(groq`*[_type == "skill"]`)
+  const experiences: Experience[] = await sanityClient.fetch(groq`*[_type == "experience"]`)
+  const projects: Project[] = await sanityClient.fetch(groq`
+  *[_type == "project"]{
+    ...,
+    technologies[]->
+  }`)
+
+// Need request to be to external api's only. Can't query our own api if it isn't built yet. Code inside of getStaticProps is never shown or run on the client side. Next hides it.
+
+  // const pageInfo: PageInfo = await fetchPageInfo()
+  // const projects: Project[] = await fetchProjects()
+  // const experiences: Experience[] = await fetchExperiences()
+  // const skills: Skill[] = await fetchSkills()
+  // const socials: Social[] = await fetchSocials()
 
   return {
     props: {

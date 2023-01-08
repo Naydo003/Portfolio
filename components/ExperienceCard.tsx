@@ -12,8 +12,8 @@ type Props = {
 const ExperienceCard = ({experience}: Props) => {
 
   return (
-    <article className='flex flex-col rounded-lg items-center space-y-7 flex-shrink-0 w-[100%] sm:w-[500px] md:w-[600px] xl:w-[900px] 
-    snap-center bg-[#292929] p-5 md:p-10 md:mt-20 opacity-40 hover:opacity-100 cursor-pointer transition-opacity duration-200 overflow-hidden'>
+    <article className='mt-10 flex flex-col rounded-lg items-center space-y-7 flex-shrink-0 w-[100%] sm:w-[500px] md:w-[600px] xl:w-[900px] 
+    snap-center bg-[#292929] p-2 sm:p-10 md:mt-20 opacity-40 hover:opacity-100 cursor-pointer transition-opacity duration-200 overflow-hidden'>
       <motion.div 
         initial={{
           y: -50,

@@ -15,7 +15,7 @@
   }
 
   .section-title {
-    @apply absolute top-16 md:top-20 uppercase tracking-[20px] text-gray-500 text-2xl
+    @apply absolute top-8 sm:top-16 md:top-20 uppercase tracking-[20px] mr-[-20px] text-gray-500 text-2xl
  
   }
 }
