@@ -3,11 +3,14 @@ import Link from 'next/link'
 
 import { SocialIcon } from 'react-social-icons'
 import { motion } from "framer-motion"
+import { Social } from '../typings'
 
 
-type Props = {}
+type Props = {
+  socials: Social[]
+}
 
-function Header({}: Props) {
+function Header({ socials }: Props) {
   return (
     <header className='sticky top-0 flex items-start p-5 justify-between max-w-6xl mx-auto z-20 xl:items-center'> 
       <motion.div 
@@ -25,16 +28,14 @@ function Header({}: Props) {
           duration: 1.5
         }}
         className="flex flex-row items-center text-grey-300">
-        <SocialIcon 
-          url="https://www.youtube.com/@SonnySangha"
-          fgColor='grey'
-          bgColor='transparent'
-        />
-        <SocialIcon 
-          url="https://www.youtube.com/@SonnySangha"
-          fgColor='grey'
-          bgColor='transparent'
-        />
+        {socials.map(social => (
+          <SocialIcon 
+            key={social._id}
+            url={social.url}
+            fgColor='grey'
+            bgColor='transparent'
+          />
+        ))}
       </motion.div>
 
       <Link href='#contact' legacyBehavior>
